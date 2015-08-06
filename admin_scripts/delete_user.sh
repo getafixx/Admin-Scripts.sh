@@ -73,15 +73,15 @@ function delete_user_and_account
               pgrep -u $username
               #ps -fp $(pgrep -u $username)
               killall -KILL -u $username
-              echo "Delete at jobs"
-              find /var/spool/at/ -name "[^.]*" -type f -user $username -delete
+              #echo "Delete at jobs"
+              #find /var/spool/at/ -name "[^.]*" -type f -user $username -delete
               echo "remove cron jobs"
               crontab -r -u $username
               
               
               
-              echo "remove print jobs"
-              lprm $username
+              #echo "remove print jobs"
+              #lprm $username
               #echo "find all files owned by user $username"
               #find / -user $username -print
               

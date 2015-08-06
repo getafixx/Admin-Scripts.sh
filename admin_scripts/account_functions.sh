@@ -36,16 +36,16 @@ function create_new_user_data_to_file
     password=$2
     filename=$(new_user_data_filename $username)
     NOW=$(date +"%d - %m - %Y")
-
+    IPADDR=`ifconfig eth0 | grep inet | sed -n "s/^\s*inet addr://p" | awk '{ print $1 }'`
+    
     echo "+===================================+" > $filename
-    echo "| New JXT HA Account Info           |" >> $filename
+    echo "| New User Account Info             |" >> $filename
     echo "+===================================+" >> $filename
-    echo "| Ip: 113.192.21.104 (n)" >> $filename
+    echo "| Ip: $IPADDR (n)" >> $filename
     echo "| UserName: $username" >> $filename
     echo "| PassWord: $password" >> $filename
-    echo "| HomeRoot: /home" >> $filename
-    echo "| Quota: unlimited" >> $filename
-    echo "| Contact Email: support@jxt.com.au" >> $filename
+    echo "| HomeRoot: /home/$username" >> $filename
+    echo "| Contact Email: robertus.johansyah@au.tribalworldwide.com" >> $filename
     echo "+===================================+" >> $filename
     echo "">> $filename
     echo "Created on $NOW">> $filename
@@ -55,7 +55,7 @@ function email_new_user_data
 {
     username=$1
     filename=$(new_user_data_filename $username)
-    subject="New JXT HA Account Info for $username"
+    subject="New DDB User Account Info for $username"
 
     admin_users_file=$(admin_users_filename)
     #echo "admin users file = $admin_users_file"
@@ -74,7 +74,7 @@ function delete_user_data_to_file
     NOW=$(date +"%d - %m - %Y")
 
     echo "+===================================+" > $filename
-    echo "| Deleted JXT HA Account Info       |" >> $filename
+    echo "| Deleted User Account Info         |" >> $filename
     echo "+===================================+" >> $filename
     echo "| UserName: $username" >> $filename
     echo "+===================================+" >> $filename
@@ -85,7 +85,7 @@ function delete_user_data_to_file
 function email_admin_user_about_account_deleted
 {
     username=$1
-    subject="JXT HA Account $username deleted"
+    subject="User Account $username deleted"
 
     admin_users_file=$(admin_users_filename)
     #echo "admin users file = $admin_users_file"

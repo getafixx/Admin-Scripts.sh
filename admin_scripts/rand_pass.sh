@@ -16,5 +16,5 @@ function randpass()
 }
 
 
-return_var=$(randpass 15 1)
+return_var=$(randpass 32 1)
 echo "$return_var"
